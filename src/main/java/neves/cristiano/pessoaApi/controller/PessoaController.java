@@ -18,13 +18,13 @@ import java.net.URI;
 @RequestMapping("/api/pessoa")
 public class PessoaController {
     @GetMapping("{cpf}")
-    public ResponseEntity<Pessoa> getByCpf(@PathVariable String cpf) {
+    public ResponseEntity<PessoaDTO> getByCpf(@PathVariable String cpf) {
         if (cpf == null || cpf.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi informado um CPF!");
         }
         String clearCpf = cpf.replaceAll("[\\.-]", "");
         Pessoa entity = new Pessoa(clearCpf, "Pessoa Fake");
-        return ResponseEntity.ok(entity);
+        return ResponseEntity.ok(PessoaDTO.of(entity));
     }
 
     @PostMapping
