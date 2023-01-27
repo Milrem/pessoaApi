@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,7 +14,7 @@ public class Pessoa {
     @Id
     private final String cpf;
     private final String nome;
-    private Date nascimento;
+    private LocalDate nascimento;
 
 
 }
