@@ -1,7 +1,10 @@
 package neves.cristiano.pessoaApi.controller;
 
+import lombok.RequiredArgsConstructor;
 import neves.cristiano.pessoaApi.dto.ReservaDTO;
+import neves.cristiano.pessoaApi.exceptions.EntidadeDuplicadaException;
 import neves.cristiano.pessoaApi.modelo.Reserva;
+import neves.cristiano.pessoaApi.service.ReservaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +15,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/reserva")
 public class ReservaController {
+    private final ReservaService service;
+
     @GetMapping("{id}")
     public ResponseEntity<ReservaDTO> getById(@PathVariable String id) {
         if (id == null || id.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi informado um ID!");
         }
-        Reserva entity = new Reserva(id);
-        entity.setPessoa("123.456.789-00");
-        entity.setMesa(UUID.randomUUID().toString());
-        entity.setData(LocalDate.now());
-        entity.setInicio(LocalTime.now().minusMinutes(30));
-        entity.setFim(LocalTime.now().plusMinutes(30));
+        Reserva entity = service.getById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi localizada uma reserva com o ID informado!"));
         return ResponseEntity.ok(ReservaDTO.of(entity));
     }
 
@@ -51,6 +53,14 @@ public class ReservaController {
         }
         if (reserva.getId() == null || reserva.getId().isBlank()) {
             reserva.setId(UUID.randomUUID().toString());
+        }
+
+        try {
+            service.adicionar(reserva.toEntity());
+        } catch (EntidadeDuplicadaException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já existe uma reserva com o ID informado");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocorreu um erro desconhecido");
         }
         return ResponseEntity.created(URI.create("/api/reserva/" + reserva.getId())).build();
     }
