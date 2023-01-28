@@ -1,7 +1,10 @@
 package neves.cristiano.pessoaApi.controller;
 
+import lombok.RequiredArgsConstructor;
+import neves.cristiano.pessoaApi.exceptions.EntidadeDuplicadaException;
 import neves.cristiano.pessoaApi.modelo.Pessoa;
 import neves.cristiano.pessoaApi.dto.PessoaDTO;
+import neves.cristiano.pessoaApi.service.PessoaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
+import java.util.Optional;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/pessoa")
 public class PessoaController {
+    private final PessoaService service;
     @GetMapping("{cpf}")
     public ResponseEntity<PessoaDTO> getByCpf(@PathVariable String cpf) {
         if (cpf == null || cpf.isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi informado um CPF!");
         }
         String clearCpf = cpf.replaceAll("[\\.-]", "");
-        Pessoa entity = new Pessoa(clearCpf, "Pessoa Fake");
+        Optional<Pessoa> encontrado = service.getById(cpf);
+        Pessoa entity = encontrado.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi localizada uma pessoa com o CPF informado!"));
         return ResponseEntity.ok(PessoaDTO.of(entity));
     }
 
@@ -38,6 +45,13 @@ public class PessoaController {
         }
         if (pessoa.getNome() == null || pessoa.getNome().isBlank()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não foi informada uma pessoa com Nome válido");
+        }
+        try {
+            service.adicionar(pessoa.toEntity());
+        } catch (EntidadeDuplicadaException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já existe uma pessoa com o CPF informado");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocorreu um erro desconhecido");
         }
         return ResponseEntity.created(URI.create("/api/pessoa/" + clearCpf)).build();
     }

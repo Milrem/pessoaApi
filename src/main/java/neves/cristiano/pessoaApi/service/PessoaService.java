@@ -1,6 +1,7 @@
 package neves.cristiano.pessoaApi.service;
 
 import lombok.RequiredArgsConstructor;
+import neves.cristiano.pessoaApi.exceptions.EntidadeDuplicadaException;
 import neves.cristiano.pessoaApi.modelo.Pessoa;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,10 @@ public class PessoaService {
         return repository.findById(id);
     }
 
-    public void adicionar(Pessoa entity) {
+    public void adicionar(Pessoa entity) throws EntidadeDuplicadaException {
+        if (repository.existsById(entity.getCpf())) {
+            throw new EntidadeDuplicadaException();
+        }
         repository.save(entity);
     }
 }
