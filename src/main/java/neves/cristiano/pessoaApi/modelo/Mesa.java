@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Data
 public class Mesa {
     @Id
-    private final String id;
-    private final String sala;
-    private final Integer capacidade;
+    private String id;
+    private String sala;
+    private Integer capacidade;
 }

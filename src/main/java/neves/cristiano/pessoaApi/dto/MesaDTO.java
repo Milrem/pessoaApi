@@ -18,7 +18,10 @@ public class MesaDTO {
     }
 
     public Mesa toEntity() {
-        Mesa mesa = new Mesa(id, sala, capacidade);
+        Mesa mesa = new Mesa();
+        mesa.setId(id);
+        mesa.setSala(sala);
+        mesa.setCapacidade(capacidade);
         return mesa;
     }
 }

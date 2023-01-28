@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Data
 public class Reserva {
     @Id
-    private final String id;
+    private String id;
     private String pessoa;
     private String mesa;
     private LocalDate data;

@@ -18,7 +18,9 @@ public class PessoaDTO {
     }
 
     public Pessoa toEntity() {
-        Pessoa entity = new Pessoa(cpf, nome);
+        Pessoa entity = new Pessoa();
+        entity.setCpf(cpf);
+        entity.setNome(nome);
         entity.setNascimento(nascimento);
         return entity;
     }

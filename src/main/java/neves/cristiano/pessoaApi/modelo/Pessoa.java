@@ -12,8 +12,8 @@ import java.util.Date;
 public class Pessoa {
 
     @Id
-    private final String cpf;
-    private final String nome;
+    private String cpf;
+    private String nome;
     private LocalDate nascimento;
 
 

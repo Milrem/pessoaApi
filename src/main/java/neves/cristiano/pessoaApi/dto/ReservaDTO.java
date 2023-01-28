@@ -27,7 +27,8 @@ public class ReservaDTO {
     }
 
     public Reserva toEntity() {
-        Reserva entity = new Reserva(id);
+        Reserva entity = new Reserva();
+        entity.setId(id);
         entity.setPessoa(pessoa);
         entity.setMesa(mesa);
         entity.setData(data);
