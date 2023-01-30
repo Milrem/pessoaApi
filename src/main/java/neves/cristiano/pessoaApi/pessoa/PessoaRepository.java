@@ -1,6 +1,6 @@
-package neves.cristiano.pessoaApi.repository;
+package neves.cristiano.pessoaApi.pessoa;
 
-import neves.cristiano.pessoaApi.modelo.Pessoa;
+import neves.cristiano.pessoaApi.pessoa.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

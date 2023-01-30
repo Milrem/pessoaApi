@@ -1,4 +1,4 @@
-package neves.cristiano.pessoaApi.exceptions;
+package neves.cristiano.pessoaApi.comun.exceptions;
 
 public class EntidadeDuplicadaException extends Throwable {
 }

@@ -1,8 +1,7 @@
-package neves.cristiano.pessoaApi.service;
+package neves.cristiano.pessoaApi.mesa;
 
 import lombok.RequiredArgsConstructor;
-import neves.cristiano.pessoaApi.exceptions.EntidadeDuplicadaException;
-import neves.cristiano.pessoaApi.modelo.Reserva;
+import neves.cristiano.pessoaApi.comun.exceptions.EntidadeDuplicadaException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +9,14 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class ReservaService {
-    private final CrudRepository<Reserva, String> repository;
+public class MesaService {
+    private final CrudRepository<Mesa, String> repository;
 
-    public Optional<Reserva> getById(String id) {
+    public Optional<Mesa> getById(String id) {
         return repository.findById(id);
     }
 
-    public void adicionar(Reserva entity) throws EntidadeDuplicadaException {
+    public void adicionar(Mesa entity) throws EntidadeDuplicadaException {
         if (repository.existsById(entity.getId())) {
             throw new EntidadeDuplicadaException();
         }

@@ -1,10 +1,7 @@
-package neves.cristiano.pessoaApi.controller;
+package neves.cristiano.pessoaApi.pessoa;
 
 import lombok.RequiredArgsConstructor;
-import neves.cristiano.pessoaApi.exceptions.EntidadeDuplicadaException;
-import neves.cristiano.pessoaApi.modelo.Pessoa;
-import neves.cristiano.pessoaApi.dto.PessoaDTO;
-import neves.cristiano.pessoaApi.service.PessoaService;
+import neves.cristiano.pessoaApi.comun.exceptions.EntidadeDuplicadaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

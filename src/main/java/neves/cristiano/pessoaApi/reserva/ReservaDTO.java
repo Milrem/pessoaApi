@@ -1,7 +1,6 @@
-package neves.cristiano.pessoaApi.dto;
+package neves.cristiano.pessoaApi.reserva;
 
 import lombok.Data;
-import neves.cristiano.pessoaApi.modelo.Reserva;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

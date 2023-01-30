@@ -1,8 +1,7 @@
-package neves.cristiano.pessoaApi.service;
+package neves.cristiano.pessoaApi.pessoa;
 
 import lombok.RequiredArgsConstructor;
-import neves.cristiano.pessoaApi.exceptions.EntidadeDuplicadaException;
-import neves.cristiano.pessoaApi.modelo.Pessoa;
+import neves.cristiano.pessoaApi.comun.exceptions.EntidadeDuplicadaException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 

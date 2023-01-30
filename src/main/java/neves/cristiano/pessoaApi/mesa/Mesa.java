@@ -1,4 +1,4 @@
-package neves.cristiano.pessoaApi.modelo;
+package neves.cristiano.pessoaApi.mesa;
 
 import lombok.Data;
 

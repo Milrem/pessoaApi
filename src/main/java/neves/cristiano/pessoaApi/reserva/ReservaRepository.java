@@ -1,6 +1,5 @@
-package neves.cristiano.pessoaApi.repository;
+package neves.cristiano.pessoaApi.reserva;
 
-import neves.cristiano.pessoaApi.modelo.Reserva;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

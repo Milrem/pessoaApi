@@ -1,6 +1,6 @@
-package neves.cristiano.pessoaApi.repository;
+package neves.cristiano.pessoaApi.mesa;
 
-import neves.cristiano.pessoaApi.modelo.Mesa;
+import neves.cristiano.pessoaApi.mesa.Mesa;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,6 @@
-package neves.cristiano.pessoaApi.dto;
+package neves.cristiano.pessoaApi.mesa;
 
 import lombok.Data;
-import neves.cristiano.pessoaApi.modelo.Mesa;
 
 @Data
 public class MesaDTO {
