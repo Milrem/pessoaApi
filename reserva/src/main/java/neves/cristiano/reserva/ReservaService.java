@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 public class ReservaService {
     private final CrudRepository<Reserva, String> repository;
+    private final PessoaApiClient pessoaApiClient;
 
     public Optional<Reserva> getById(String id) {
         return repository.findById(id);
@@ -37,7 +38,7 @@ public class ReservaService {
         }
 
         try {
-            if (!new PessoaApiClient().existePessoa(entity.getPessoa())) {
+            if (!pessoaApiClient.existePessoa(entity.getPessoa())) {
                 throw new ReservaInvalidaException("Pessoa não localizada");
             }
         } catch (RestClientException e) {
