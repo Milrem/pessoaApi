@@ -13,6 +13,7 @@ import java.util.Optional;
 public class ReservaService {
     private final CrudRepository<Reserva, String> repository;
     private final PessoaApiClient pessoaApiClient;
+    private final MesaApiClient mesaApiClient;
 
     public Optional<Reserva> getById(String id) {
         return repository.findById(id);
@@ -30,7 +31,7 @@ public class ReservaService {
          */
 
         try {
-            if (!new MesaApiClient().existeMesa(entity.getMesa())) {
+            if (!mesaApiClient.existeMesa(entity.getMesa())) {
                 throw new ReservaInvalidaException("Mesa não localizada");
             }
         } catch (RestClientException e) {

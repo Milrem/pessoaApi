@@ -13,7 +13,7 @@ public class PessoaApiClient {
     private final static String ENDPOINT = "http://{host}:{port}/api/pessoa/{cpf}";
 
     private final EurekaClient eurekaClient;
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public boolean existePessoa(String cpf) {
         InstanceInfo apiInstanceInfo = eurekaClient.getApplication("rooms-pessoa")
